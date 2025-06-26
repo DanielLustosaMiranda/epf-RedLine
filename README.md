@@ -103,3 +103,4 @@ Para adicionar novos modelos (ex: Atividades):
 ## 🧠 Autor e Licença
 Projeto desenvolvido como template didático para disciplinas de Programação Orientada a Objetos, baseado no [BMVC](https://github.com/hgmachine/bmvc_start_from_this).
 Você pode reutilizar, modificar e compartilhar livremente.
+# epf-RedLine
