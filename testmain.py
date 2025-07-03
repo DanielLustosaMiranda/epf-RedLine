@@ -2,11 +2,20 @@ from models.carro import CarroModel
 from models.carro import Carro
 from models.manutecao import Manutencao
 from models.manutecao import ManutencaoModel
+from models.user import UserModel
+from models.user import User
 
+user_model = UserModel()
 carro_model = CarroModel()
 manut_model = ManutencaoModel()
 
-carro = Carro("João", "Fiat", "Uno", 2010, "ABC1234", 120000)
+user = User(1, "Daniel", "dani1234@gmail.com", "18/01/18")
+user2 = User(2, "João", "joao@gmai.com", "10/10/10")
+
+user_model.add_user(user)
+user_model.add_user(user2)
+
+carro = Carro(1 , "Fiat", "Uno", 2010, "ABC1234", 120000)
 carro_model.add_carro(carro)
 
 manut1 = Manutencao("Troca de óleo", "2025-07-03", 250.0, "Preventiva", "ABC1234")
