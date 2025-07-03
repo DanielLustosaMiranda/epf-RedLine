@@ -1,0 +1,10 @@
+[
+    {
+        "usuario": "João",
+        "marca": "Fiat",
+        "modelo": "Uno",
+        "ano": 2010,
+        "placa": "ABC1234",
+        "km_atual": 120000
+    }
+]

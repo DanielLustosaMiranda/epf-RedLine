@@ -1,0 +1,16 @@
+[
+    {
+        "descricao_servico": "Troca de óleo",
+        "data": "2025-07-03",
+        "custo": 250.0,
+        "tipo_manutencao": "Preventiva",
+        "id_veiculo": "ABC1234"
+    },
+    {
+        "descricao_servico": "Revisão dos freios",
+        "data": "2025-07-10",
+        "custo": 400.0,
+        "tipo_manutencao": "Corretiva",
+        "id_veiculo": "ABC1234"
+    }
+]
