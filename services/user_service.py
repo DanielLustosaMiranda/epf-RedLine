@@ -1,5 +1,8 @@
 from bottle import request
 from models.user import UserModel, User
+import json
+import os
+from models.user import User
 
 class UserService:
     def __init__(self):
@@ -40,3 +43,32 @@ class UserService:
 
     def delete_user(self, user_id):
         self.user_model.delete_user(user_id)
+
+    def create_account(self):
+        username = request.forms.get('username')
+        password = request.forms.get('password')
+
+        existing = self.user_model.get_by_username(username)
+        if existing:
+            return False
+        
+        last_id = max([u.id for u in self.user_model.get_all()], default=0)
+        new_user = User(id=last_id + 1, username=username, password=password)
+        self.user_model.add_user(new_user)
+        return True
+    
+    def authenticate(self):
+        username = request.forms.get('username')
+        password = request.forms.get('password')
+
+        user = self.user_model.get_by_username(username)
+        if user and user.password == password:
+            return user  # sucesso
+        return None 
+    
+    def find_user_by_username(username):
+        users = load_users()
+        for user in users:
+            if user.username == username:
+                return user
+        return None

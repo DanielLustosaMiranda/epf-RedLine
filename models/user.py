@@ -6,11 +6,13 @@ from typing import List
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
 class User:
-    def __init__(self, id, name, email, birthdate):
+    def __init__(self, id, name, email, birthdate,username=None,password=None):
         self.id = id
         self.name = name
         self.email = email
         self.birthdate = birthdate
+        self.username = username
+        self.password = password
 
     def __repr__(self):
         return (f"User(id={self.id}, name='{self.name}', email='{self.email}', "
@@ -22,7 +24,9 @@ class User:
             'id': self.id,
             'name': self.name,
             'email': self.email,
-            'birthdate': self.birthdate
+            'birthdate': self.birthdate,
+            'username': self.username,
+            'password': self.password
         }
 
 
@@ -35,6 +39,16 @@ class User:
             birthdate=data['birthdate']
         )
 
+    @staticmethod
+    def from_dict(data):
+        return User(
+            data["id"],
+            data["name"],
+            data["email"],
+            data["birthdate"],
+            data.get("username"),
+            data.get("password")
+        )
 
 class UserModel:
     FILE_PATH = os.path.join(DATA_DIR, 'users.json')
@@ -80,3 +94,10 @@ class UserModel:
     def delete_user(self, user_id: int):
         self.users = [u for u in self.users if u.id != user_id]
         self._save()
+    
+    def get_by_username(self, username):
+        users = self.get_all()
+        for user in users:
+            if user.username == username:
+                return user
+        return None
