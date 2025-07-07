@@ -55,5 +55,14 @@
         "custo": 600.0,
         "tipo": "Preventiva",
         "km": 640
+    },
+    {
+        "id": 8,
+        "car_id": 2,
+        "descricao": "troca de agua",
+        "data": "2025-07-07",
+        "custo": 10000.0,
+        "tipo": "Preventiva",
+        "km": 0
     }
 ]

@@ -27,7 +27,7 @@
         {{!base}}
     </main>
     
-    <footer>
+    <footer class="container_footer">
         <p>&copy; 2025, RedLine. Todos os direitos reservados.</p>
     </footer>
 

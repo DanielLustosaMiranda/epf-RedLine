@@ -15,36 +15,7 @@
 
     <!-- Ativa o realce automaticamente -->
     <script>hljs.highlightAll();</script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background: #f9f9f9;
-            color: #333;
-        }
-        h1, h2 {
-            color: #004d80;
-        }
-        pre {
-            background: #f0f0f0;
-            border-left: 4px solid #007acc;
-            padding: 10px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, monospace;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        .comment {
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-left: 4px solid #4CAF50;
-            margin: 10px 0;
-            font-style: italic;
-        }
-    </style>
+    
 </head>
 <body>
 

@@ -7,5 +7,14 @@
         "ano": 2000,
         "placa": "ABD1234",
         "km_atual": 0
+    },
+    {
+        "id": 2,
+        "user_id": 4,
+        "marca": "fiat",
+        "modelo": "palio",
+        "ano": 2006,
+        "placa": "ABCD-1234",
+        "km_atual": 0
     }
 ]

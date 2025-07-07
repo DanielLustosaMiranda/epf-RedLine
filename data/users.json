@@ -12,5 +12,19 @@
         "email": "a@gmail.com",
         "birthdate": "2001-01-01",
         "password_hash": "scrypt:32768:8:1$BBK8rU3iAinEav3M$092b49a8dca78471abff515e45e41723c7471650d4c564682776e79e5eb1c65fd8c808c42c2bea623549f562613c0e05ce2c49ace951ff1be9e39ed98f3a3e9d"
+    },
+    {
+        "id": 3,
+        "name": "Lucas",
+        "email": "lucastouram@gmail.com",
+        "birthdate": "2005-08-15",
+        "password_hash": "scrypt:32768:8:1$sU9xyweCOhbzWWxu$4c073a6e3ef1dc5a358692ab0076f07a6382b6ffd7f0bc13c2faf91f68b750b9cf325aaa929f09a0bda928507f3bf07a470f3a6a2127492149971f3dca53f553"
+    },
+    {
+        "id": 4,
+        "name": "danielzin",
+        "email": "danizlcria@gmail.com",
+        "birthdate": "1088-06-04",
+        "password_hash": "scrypt:32768:8:1$DVqtvbr5lmEDtAld$7795fcb399c9e0b303e0a9615ea973d2bcb57014a4e5b2f4406bd1a139865a54d724d0a39cb3523afbbf3a7438f617241dd736c2463efa7ac0cb2f48aa5ebc6d"
     }
 ]

@@ -15,7 +15,7 @@ def list_car_manutencoes(car_id):
 @login_required
 def show_add_manutencao_form(car_id):
     car = car_service.get_car_by_id(car_id)
-    return dict(car=car)
+    return dict(car=car, manutencao=None) 
 
 @route('/car/<car_id:int>/manutencoes/add', method='POST')
 @login_required
