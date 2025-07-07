@@ -26,5 +26,12 @@
         "email": "danizlcria@gmail.com",
         "birthdate": "1088-06-04",
         "password_hash": "scrypt:32768:8:1$DVqtvbr5lmEDtAld$7795fcb399c9e0b303e0a9615ea973d2bcb57014a4e5b2f4406bd1a139865a54d724d0a39cb3523afbbf3a7438f617241dd736c2463efa7ac0cb2f48aa5ebc6d"
+    },
+    {
+        "id": 5,
+        "name": "Joel Santana",
+        "email": "joel@gmail.com",
+        "birthdate": "1986-07-07",
+        "password_hash": "scrypt:32768:8:1$O3SL7DMMnS7Rbzjj$cc91932abcc85f9fd23579a7e02942d7dcd70da0704b0898e14fc2ef1a68710d204d8e142fab3bf6c5610bc99f09259e92ec6decbfba567d1657213aa01c00cd"
     }
 ]

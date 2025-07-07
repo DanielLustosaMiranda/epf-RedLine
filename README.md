@@ -172,7 +172,7 @@ Arquivos JSON que simulam o banco de dados:
 - *(A pasta `sessions/` é criada automaticamente em runtime e pode ser ignorada pelo Git.)*
 
 ---
-
+![Diagrama UML do Projeto](diagrama/Diagrama.png)
 ## ▶️ Como Executar
 
 1. Crie o ambiente virtual na pasta fora do seu projeto:

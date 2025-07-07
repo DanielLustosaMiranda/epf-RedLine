@@ -16,5 +16,23 @@
         "ano": 2006,
         "placa": "ABCD-1234",
         "km_atual": 0
+    },
+    {
+        "id": 3,
+        "user_id": 5,
+        "marca": "Chevrolet",
+        "modelo": "Onix Plus 1.0 LT",
+        "ano": 2024,
+        "placa": "ADC-1540",
+        "km_atual": 6521
+    },
+    {
+        "id": 4,
+        "user_id": 5,
+        "marca": "Hyndai",
+        "modelo": "Tucson 1.6 GLS",
+        "ano": 2021,
+        "placa": "OHA-3312",
+        "km_atual": 87000
     }
 ]

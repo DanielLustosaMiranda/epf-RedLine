@@ -64,5 +64,23 @@
         "custo": 10000.0,
         "tipo": "Preventiva",
         "km": 0
+    },
+    {
+        "id": 9,
+        "car_id": 4,
+        "descricao": "Troca de oleo e filtro de oleo",
+        "data": "2024-12-02",
+        "custo": 220.0,
+        "tipo": "Preventiva",
+        "km": 1500
+    },
+    {
+        "id": 10,
+        "car_id": 4,
+        "descricao": "retifica do motor",
+        "data": "2025-12-05",
+        "custo": 3200.0,
+        "tipo": "corretiva",
+        "km": 80000
     }
 ]
