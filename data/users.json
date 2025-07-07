@@ -1,3 +1,16 @@
 [
-
+    {
+        "id": 1,
+        "name": "bb",
+        "email": "bb@example.com",
+        "birthdate": "2006-02-01",
+        "password_hash": "scrypt:32768:8:1$mzHwVpZsjsMmLtrq$7ec1500f220a2d061c2174a4fe734e78d574ce3ae10174166b2ec0ccf3af8de84d3879abd96ecde9def6674057037ea5dedb84441c58f7ee703a63b41d8e7d94"
+    },
+    {
+        "id": 2,
+        "name": "ab",
+        "email": "a@gmail.com",
+        "birthdate": "2001-01-01",
+        "password_hash": "scrypt:32768:8:1$BBK8rU3iAinEav3M$092b49a8dca78471abff515e45e41723c7471650d4c564682776e79e5eb1c65fd8c808c42c2bea623549f562613c0e05ce2c49ace951ff1be9e39ed98f3a3e9d"
+    }
 ]

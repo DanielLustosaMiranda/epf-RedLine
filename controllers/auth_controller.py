@@ -1,4 +1,4 @@
-from bottle import route, view, request, redirect
+from bottle import route, view, request, redirect, template
 from services import user_service
 
 @route('/login', method='GET')
@@ -16,10 +16,12 @@ def process_login():
 
     if user:
         session['user_id'] = user['id']
-        session['user_name'] = user['name']
+        # Corrected line
+        session['user_name'] = user['name'] # Use 'name' instead of 'user_name'
         redirect('/')
     else:
-        return view('login', error="Email ou senha inválidos.")
+        # Use template() here!
+        return template('login', error="Email ou senha inválidos.")
 
 @route('/logout')
 def process_logout():
@@ -41,11 +43,13 @@ def process_signup():
     confirm_password = request.forms.get('confirm_password')
 
     if password != confirm_password:
-        return view('signup', error="As senhas não coincidem.")
+        # Use template() here!
+        return template('signup', error="As senhas não coincidem.")
     
     user = user_service.create_user(name, email, birthdate, password)
 
     if user:
         redirect('/login') # Redireciona para o login após o sucesso
     else:
-        return view('signup', error="Este email já está em uso.")
+        # Use template() here!
+        return template('signup', error="Este email já está em uso.")
