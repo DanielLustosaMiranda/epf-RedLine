@@ -4,7 +4,7 @@ class Config:
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Configurações do servidor
-    HOST = 'localhost'
+    HOST = '0.0.0.0'
     PORT = 8080
     DEBUG = True
     RELOADER = True

@@ -25,7 +25,6 @@ class ManutencaoProgramada:
             f"(última: {self._ultima_data})"
         )
 
-# Caminho dos dados
 DATA_DIR = "./data"
 
 class ManutencaoProgramadaModel:

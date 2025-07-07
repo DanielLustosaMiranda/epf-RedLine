@@ -1,87 +1,85 @@
-import bottle 
-from bottle import request
-from models.user import UserModel, User
-import json
-import os
+import data_manager
+from werkzeug.security import generate_password_hash, check_password_hash
 
+USERS_FILE = 'users.json'
 
-class UserService:
-    def __init__(self):
-        self.user_model = UserModel()
+def get_all_users():
+    return data_manager.read_data(USERS_FILE)
 
+def get_user_by_id(user_id):
+    all_users = get_all_users()
+    for user in all_users:
+        if user['id'] == int(user_id):
+            return user
+    return None
 
-    def get_all(self):
-        users = self.user_model.get_all()
-        return users
-
-
-    def save(self):
-        last_id = max([u.id for u in self.user_model.get_all()], default=0)
-        new_id = last_id + 1
-        name = request.forms.get('name')
-        email = request.forms.get('email')
-        birthdate = request.forms.get('birthdate')
-        username = request.forms.get('username')
-        password = request.forms.get('password')
-
-        user = User(id=new_id, name=name, email=email, birthdate=birthdate, username=username, password=password)
-        self.user_model.add_user(user)
-
-
-    def get_by_id(self, user_id):
-        return self.user_model.get_by_id(user_id)
-
-
-    def edit_user(self, user):
-        name = request.forms.get('name')
-        email = request.forms.get('email')
-        birthdate = request.forms.get('birthdate')
-
-        user.name = name
-        user.email = email
-        user.birthdate = birthdate
-
-        self.user_model.update_user(user)
-
-
-    def delete_user(self, user_id):
-        self.user_model.delete_user(user_id)
-
-    def create_account(self):
-        username = request.forms.get('username')
-        password = request.forms.get('password')
-
-        existing = self.user_model.get_by_username(username)
-        if existing:
-            return False
-        
-        last_id = max([u.id for u in self.user_model.get_all()], default=0)
-        new_user = User(id=last_id + 1, username=username, password=password)
-        self.user_model.add_user(new_user)
-        return True
-    
-    def authenticate(self,username,password):
-        username = request.forms.get('username')
-        password = request.forms.get('password')
-
-        user = self.user_model.get_by_username(username)
-        if user and user.password == password:
-            return user  # sucesso
-        return None 
-    
-    def _load_users(self):
-        if not os.path.exists(self.FILE_PATH):
-            return []
-        with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return [User(**item) for item in data]
-
-    def find_user_by_username(self, username):
-        users = self.user_model.get_all()
-        for user in users:
-            if user.username == username:
-                return user
+def get_user_by_email(email):
+    if not email:
         return None
     
-    def add_user(self, user):
-        self.user_model.add_user(user)
+    all_users = get_all_users()
+    email = email.strip().lower()
+    for user in all_users:
+        if user['email'].strip().lower() == email:
+            return user
+    return None
+
+def create_user(name, email, birthdate, password):
+    if get_user_by_email(email):
+        print(f"Erro: Email '{email}' já cadastrado.")
+        return None
+
+    all_users = get_all_users()
+    
+    last_id = all_users[-1]['id'] if all_users else 0
+    new_id = last_id + 1
+
+    new_user = {
+        "id": new_id,
+        "name": name,
+        "email": email,
+        "birthdate": birthdate,
+        "password_hash": generate_password_hash(password)
+    }
+
+    all_users.append(new_user)
+    data_manager.write_data(USERS_FILE, all_users)
+    return new_user
+
+def authenticate_user(email, password):
+    user = get_user_by_email(email)
+    
+    if user and check_password_hash(user['password_hash'], password):
+        return user
+        
+    return None
+
+
+def update_user(user_id, name, email, birthdate):
+    """Atualiza os dados de um usuário existente."""
+    all_users = get_all_users()
+    user_found = False
+    
+    for i, user in enumerate(all_users):
+        if user['id'] == int(user_id):
+            all_users[i]['name'] = name
+            all_users[i]['email'] = email
+            all_users[i]['birthdate'] = birthdate
+            user_found = True
+            break
+            
+    if user_found:
+        data_manager.write_data(USERS_FILE, all_users)
+        return all_users[i] # Retorna o usuário atualizado
+    
+    return None
+
+def delete_user(user_id):
+    all_users = get_all_users()
+    users_to_keep = [user for user in all_users if user['id'] != int(user_id)]
+
+    if len(users_to_keep) < len(all_users):
+        data_manager.write_data(USERS_FILE, users_to_keep)
+        return True 
+        
+    return False 

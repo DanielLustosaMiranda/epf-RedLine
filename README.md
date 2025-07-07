@@ -12,45 +12,80 @@ Fornecer uma base simples, extensível e didática para construção de aplicaç
 
 ## 🗂 Estrutura de Pastas
 
-```bash
-poo-python-bottle-template/
-├── app.py # Ponto de entrada do sistema
-├── config.py # Configurações e caminhos do projeto
-├── main.py # Inicialização da aplicação
-├── requirements.txt # Dependências do projeto
-├── README.md # Este arquivo
-├── controllers/ # Controladores e rotas
-├── models/ # Definição das entidades (ex: User)
-├── services/ # Lógica de persistência (JSON)
-├── views/ # Arquivos HTML (Bottle Templating)
-├── static/ # CSS, JS e imagens
-├── data/ # Arquivos JSON de dados
-└── .vscode/ # Configurações opcionais do VS Code
+```bash 
+epf-RedLine/
+├── app.py               # Ponto de entrada da aplicação Bottle
+├── config.py            # Configurações globais do projeto
+├── main.py              # Inicialização da aplicação
+├── requirements.txt     # Dependências
+├── README.md            # Este arquivo
+├── controllers/         # Lógica de controle e rotas
+│   ├── auth_controller.py
+│   ├── base_controller.py
+│   ├── carro_controller.py
+│   ├── manutencao_controller.py
+│   ├── user_controller.py
+│   └── __init__.py
+├── models/              # Definição das entidades e dados
+│   ├── carro.py
+│   ├── manutencao.py
+│   ├── manutencaoProgramada.py
+│   ├── itemVidaUtil.py
+│   └── user.py
+├── services/            # Manipulação e persistência de dados
+│   └── user_service.py
+├── views/               # Templates HTML Bottle
+│   ├── layout.tpl
+│   ├── login.tpl
+│   ├── signup.tpl
+│   ├── carros.tpl
+│   ├── cadastro_carro.tpl
+│   ├── manutencoes.tpl
+│   ├── cadastro_manutencao.tpl
+│   └── users.tpl
+├── data/                # Dados persistidos (JSON)
+│   ├── users.json
+│   ├── carros.json
+│   └── manutencoes.json
+├── static/              # Arquivos estáticos (CSS, JS, imagens)
+│   ├── css/
+│   ├── js/
+│   └── img/
+└── test.py              # Script de testes ou inicialização auxiliar
+
 ```
-
-
 ---
 
 ## 📁 Descrição das Pastas
 
 ### `controllers/`
-Contém as classes responsáveis por lidar com as rotas da aplicação. Exemplos:
-- `user_controller.py`: rotas para listagem, adição, edição e remoção de usuários.
-- `base_controller.py`: classe base com utilitários comuns.
+Responsáveis pelas rotas e lógica de fluxo da aplicação:
+
+- **auth_controller.py** – Login e cadastro.
+- **carro_controller.py** – CRUD de carros.
+- **manutencao_controller.py** – CRUD de manutenções.
+- **user_controller.py** – Gerenciamento de usuários.
 
 ### `models/`
-Define as classes que representam os dados da aplicação. Exemplo:
-- `user.py`: classe `User`, com atributos como `id`, `name`, `email`, etc.
+Definem as entidades e estruturas de dados:
+
+- `User`: dados de usuário (login e informações pessoais)
+- `Carro`: dados de veículos
+- `Manutencao`: serviços realizados nos veículos
+- Outros modelos auxiliares
 
 ### `services/`
-Responsável por salvar, carregar e manipular dados usando arquivos JSON. Exemplo:
-- `user_service.py`: contém métodos como `get_all`, `add_user`, `delete_user`.
-
+Responsáveis pela **persistência** e manipulação de dados JSON:
+- `user_service.py`: operações de usuário (`create_account`, `authenticate`, etc.)
 ### `views/`
-Contém os arquivos `.tpl` utilizados pelo Bottle como páginas HTML:
-- `layout.tpl`: estrutura base com navegação e bloco `content`.
-- `users.tpl`: lista os usuários.
-- `user_form.tpl`: formulário para adicionar/editar usuário.
+Templates HTML (Bottle Templating Language) usados como páginas da aplicação:
+
+- `login.tpl`, `signup.tpl`: telas de autenticação
+- `carros.tpl`: listagem de carros
+- `manutencoes.tpl`: listagem de manutenções
+- `layout.tpl`: layout base reutilizável
+
+---
 
 ### `static/`
 Arquivos estáticos como:
@@ -59,8 +94,12 @@ Arquivos estáticos como:
 - `img/BottleLogo.png`: exemplo de imagem.
 
 ### `data/`
-Armazena os arquivos `.json` que simulam o banco de dados:
-- `users.json`: onde os dados dos usuários são persistidos.
+Arquivos JSON que simulam o banco de dados:
+
+- `users.json`
+- `carros.json
+- `manutencoes.json`
+---
 
 ---
 

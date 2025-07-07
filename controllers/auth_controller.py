@@ -1,54 +1,51 @@
-from bottle import request, response, template, route, redirect
-from models.user import User
-from services.user_service import UserService
+from bottle import route, view, request, redirect
+from services import user_service
 
-user_service = UserService()
+@route('/login', method='GET')
+@view('login')
+def show_login_form():
+    return dict(error=None)
 
-class AuthController:
+@route('/login', method='POST')
+def process_login():
+    session = request.environ.get('beaker.session')
+    email = request.forms.get('email')
+    password = request.forms.get('password')
 
-    @route('/login', method=['GET', 'POST'])
-    def login(self):
-        if request.method == 'GET':
-            return template('login')
-        elif request.method == 'POST':
-            username = request.forms.get('user')
-            password = request.forms.get('password')
-            user = user_service.authenticate(username, password)
-            if user:
-                redirect(f"/dashboard/{user.id}")
-            else:
-                return template('login', error="Usuário ou senha inválidos.")
+    user = user_service.authenticate_user(email, password)
 
-    @route('/signup', method=['GET', 'POST'])
-    def signup(self):
-        if request.method == 'GET':
-            return template('signup', error=None)
+    if user:
+        session['user_id'] = user['id']
+        session['user_name'] = user['name']
+        redirect('/')
+    else:
+        return view('login', error="Email ou senha inválidos.")
 
-        elif request.method == 'POST':
-            name = request.forms.get('name')
-            email = request.forms.get('email')
-            birthdate = request.forms.get('birthdate')
-            username = request.forms.get('username')
-            password = request.forms.get('password')
+@route('/logout')
+def process_logout():
+    session = request.environ.get('beaker.session')
+    session.delete()
+    redirect('/login')
 
-            
-            if user_service.find_user_by_username(username):
-                return template('signup', error="Usuário já existe.")
+@route('/signup', method='GET')
+@view('signup')
+def show_signup_form():
+    return dict(error=None)
 
-           
-            last_id = max([u.id for u in user_service.get_all()], default=0)
-            new_id = last_id + 1
+@route('/signup', method='POST')
+def process_signup():
+    name = request.forms.get('name')
+    email = request.forms.get('email')
+    birthdate = request.forms.get('birthdate')
+    password = request.forms.get('password')
+    confirm_password = request.forms.get('confirm_password')
 
-            new_user = User(
-                id=new_id,
-                name=name,
-                email=email,
-                birthdate=birthdate,
-                username=username,
-                password=password
-            )
+    if password != confirm_password:
+        return view('signup', error="As senhas não coincidem.")
+    
+    user = user_service.create_user(name, email, birthdate, password)
 
-            user_service.add_user(new_user)
-            redirect(f"/dashboard/{new_user.id}")
-
-       
+    if user:
+        redirect('/login') # Redireciona para o login após o sucesso
+    else:
+        return view('signup', error="Este email já está em uso.")

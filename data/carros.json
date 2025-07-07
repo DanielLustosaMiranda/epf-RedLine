@@ -1,10 +1,11 @@
 [
     {
-        "usuario": "João",
-        "marca": "Fiat",
-        "modelo": "Uno",
-        "ano": 2010,
-        "placa": "ABC1234",
-        "km_atual": 120000
+        "id": 1,
+        "user_id": 1,
+        "marca": "toyota",
+        "modelo": "mk4",
+        "ano": 2000,
+        "placa": "ABD1234",
+        "km_atual": 0
     }
 ]

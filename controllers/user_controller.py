@@ -1,54 +1,48 @@
-from bottle import Bottle, request
-from .base_controller import BaseController
-from services.user_service import UserService
+from bottle import route, view, request, redirect
+from services import user_service
 
-class UserController(BaseController):
-    def __init__(self, app):
-        super().__init__(app)
+# Rota para listar todos os usuários
+@route('/users')
+@view('users')
+def list_all_users():
+    users = user_service.get_all_users()
+    return dict(users=users)
 
-        self.setup_routes()
-        self.user_service = UserService()
+# Rotas para adicionar um novo usuário
+@route('/users/add', method='GET')
+@view('user_form')
+def show_add_user_form():
+    # Para o formulário de adição, não há dados de usuário existentes
+    return dict(user=None, action_url='/users/add')
 
+@route('/users/add', method='POST')
+def process_add_user():
+    name = request.forms.get('name')
+    email = request.forms.get('email')
+    birthdate = request.forms.get('birthdate')
+    password = request.forms.get('password')
 
-    # Rotas User
-    def setup_routes(self):
-        self.app.route('/users', method='GET', callback=self.list_users)
-        self.app.route('/users/add', method=['GET', 'POST'], callback=self.add_user)
-        self.app.route('/users/edit/<user_id:int>', method=['GET', 'POST'], callback=self.edit_user)
-        self.app.route('/users/delete/<user_id:int>', method='POST', callback=self.delete_user)
+    user_service.create_user(name, email, birthdate, password)
+    redirect('/users')
 
+# Rotas para editar um usuário existente
+@route('/users/edit/<user_id>')
+@view('user_form')
+def show_edit_user_form(user_id):
+    user = user_service.get_user_by_id(user_id)
+    return dict(user=user, action_url=f'/users/edit/{user_id}')
 
-    def list_users(self):
-        users = self.user_service.get_all()
-        return self.render('users', users=users)
+@route('/users/edit/<user_id>', method='POST')
+def process_edit_user(user_id):
+    name = request.forms.get('name')
+    email = request.forms.get('email')
+    birthdate = request.forms.get('birthdate')
+    
+    user_service.update_user(user_id, name, email, birthdate)
+    redirect('/users')
 
-
-    def add_user(self):
-        if request.method == 'GET':
-            return self.render('user_form', user=None, action="/users/add")
-        else:
-            # POST - salvar usuário
-            self.user_service.save()
-            self.redirect('/users')
-
-
-    def edit_user(self, user_id):
-        user = self.user_service.get_by_id(user_id)
-        if not user:
-            return "Usuário não encontrado"
-
-        if request.method == 'GET':
-            return self.render('user_form', user=user, action=f"/users/edit/{user_id}")
-        else:
-            # POST - salvar edição
-            self.user_service.edit_user(user)
-            self.redirect('/users')
-
-
-    def delete_user(self, user_id):
-        self.user_service.delete_user(user_id)
-        self.redirect('/users')
-
-
-user_routes = Bottle()
-user_controller = UserController(user_routes)
+# Rota para deletar um usuário
+@route('/users/delete/<user_id>')
+def process_delete_user(user_id):
+    user_service.delete_user(user_id)
+    redirect('/users')

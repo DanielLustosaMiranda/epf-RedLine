@@ -81,14 +81,15 @@ class UserModel:
                 self._save()
                 break
 
-
     def delete_user(self, user_id: int):
         self.users = [u for u in self.users if u.id != user_id]
         self._save()
     
     def get_by_username(self, username):
-        users = self.get_all()
-        for user in users:
-            if user.username == username:
+        if not username:
+            return None
+        username = username.strip().lower()
+        for user in self.users:
+            if user.username and user.username.strip().lower() == username:
                 return user
         return None

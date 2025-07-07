@@ -22,19 +22,19 @@
             </thead>
 
             <tbody>
-                % for u in users:
+                % for user in users:
                 <tr>
-                    <td>{{u.id}}</td>
-                    <td>{{u.name}}</td>
-                    <td><a href="mailto:{{u.email}}">{{u.email}}</a></td>
-                    <td>{{u.birthdate}}</td>
+                    <td>{{user['id']}}</td>
+                    <td>{{user['name']}}</td>
+                    <td><a href="mailto:{{user['email']}}">{{user['email']}}</a></td>
+                    <td>{{user['birthdate']}}</td>
                     
                     <td class="actions">
-                        <a href="/users/edit/{{u.id}}" class="btn btn-sm btn-edit">
+                        <a href="/users/edit/{{user['id']}}" class="btn btn-sm btn-edit">
                             <i class="fas fa-edit"></i> Editar
                         </a>
 
-                        <form action="/users/delete/{{u.id}}" method="post" 
+                        <form action="/users/delete/{{user['id']}}" method="post" 
                               onsubmit="return confirm('Tem certeza?')">
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i> Excluir
