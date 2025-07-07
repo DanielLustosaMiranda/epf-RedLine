@@ -14,45 +14,95 @@ Fornecer uma base simples, extensível e didática para construção de aplicaç
 
 ```bash 
 epf-RedLine/
-├── app.py               # Ponto de entrada da aplicação Bottle
-├── config.py            # Configurações globais do projeto
-├── main.py              # Inicialização da aplicação
-├── requirements.txt     # Dependências
-├── README.md            # Este arquivo
-├── controllers/         # Lógica de controle e rotas
-│   ├── auth_controller.py
-│   ├── base_controller.py
-│   ├── carro_controller.py
-│   ├── manutencao_controller.py
-│   ├── user_controller.py
-│   └── __init__.py
-├── models/              # Definição das entidades e dados
-│   ├── carro.py
-│   ├── manutencao.py
-│   ├── manutencaoProgramada.py
-│   ├── itemVidaUtil.py
-│   └── user.py
-├── services/            # Manipulação e persistência de dados
-│   └── user_service.py
-├── views/               # Templates HTML Bottle
-│   ├── layout.tpl
-│   ├── login.tpl
-│   ├── signup.tpl
-│   ├── carros.tpl
-│   ├── cadastro_carro.tpl
-│   ├── manutencoes.tpl
-│   ├── cadastro_manutencao.tpl
-│   └── users.tpl
-├── data/                # Dados persistidos (JSON)
-│   ├── users.json
-│   ├── carros.json
-│   └── manutencoes.json
-├── static/              # Arquivos estáticos (CSS, JS, imagens)
-│   ├── css/
-│   ├── js/
-│   └── img/
-└── test.py              # Script de testes ou inicialização auxiliar
-
+├── app.py
+├── auth_decorator.py
+├── config.py
+├── controllers
+│   ├── auth_controller.py
+│   ├── car_controller.py
+│   ├── dashboard_controller.py
+│   ├── manutencao_controller.py
+│   ├── __pycache__
+│   │   ├── auth_controller.cpython-311.pyc
+│   │   ├── auth_controller.cpython-313.pyc
+│   │   ├── base_controller.cpython-313.pyc
+│   │   ├── car_controller.cpython-311.pyc
+│   │   ├── car_controller.cpython-313.pyc
+│   │   ├── dashboard_controller.cpython-313.pyc
+│   │   ├── __init__.cpython-313.pyc
+│   │   ├── manutencao_controller.cpython-311.pyc
+│   │   ├── manutencao_controller.cpython-313.pyc
+│   │   ├── user_controller.cpython-311.pyc
+│   │   └── user_controller.cpython-313.pyc
+│   └── user_controller.py
+├── data
+│   ├── carros.json
+│   ├── manutencoes.json
+│   └── users.json
+├── data_manager.py
+├── Makefile
+├── models
+│   ├── carro.py
+│   ├── itemVidaUtil.py
+│   ├── maintenance.py
+│   ├── manutencaoProgramada.py
+│   ├── manutencao.py
+│   ├── __pycache__
+│   │   ├── maintenance.cpython-313.pyc
+│   │   ├── manutencao.cpython-313.pyc
+│   │   ├── user.cpython-313.pyc
+│   │   └── vehicle.cpython-313.pyc
+│   ├── user.py
+│   └── vehicle.py
+├── __pycache__
+│   ├── app.cpython-313.pyc
+│   ├── auth_decorator.cpython-311.pyc
+│   ├── auth_decorator.cpython-313.pyc
+│   ├── config.cpython-313.pyc
+│   ├── data_manager.cpython-311.pyc
+│   └── data_manager.cpython-313.pyc
+├── README.md
+├── requirements.txt
+├── services
+│   ├── car_service.py
+│   ├── manutencao_service.py
+│   ├── __pycache__
+│   │   ├── car_service.cpython-311.pyc
+│   │   ├── car_service.cpython-313.pyc
+│   │   ├── maintenance_service.cpython-313.pyc
+│   │   ├── manutencao_service.cpython-311.pyc
+│   │   ├── manutencao_service.cpython-313.pyc
+│   │   ├── user_service.cpython-311.pyc
+│   │   ├── user_service.cpython-313.pyc
+│   │   └── vehicle_service.cpython-313.pyc
+│   ├── user_service.py
+│   └── vehicle_service.py
+├── static
+│   ├── css
+│   │   ├── dashboard.css
+│   │   ├── helper.css
+│   │   └── style.css
+│   ├── img
+│   │   └── BottleLogo.png
+│   └── js
+│       ├── helper.js
+│       └── main.js
+├── test.py
+├── view_helper.py
+└── views
+    ├── car_form.tpl
+    ├── car_list.tpl
+    ├── dashboard.tpl
+    ├── helper-final.tpl
+    ├── home_logged.tpl
+    ├── home.tpl
+    ├── layout.tpl
+    ├── login.tpl
+    ├── manutencao_form.tpl
+    ├── manutencao_list.tpl
+    ├── signup.tpl
+    ├── user_form.tpl
+    └── users.tpl
 ```
 ---
 
@@ -61,45 +111,65 @@ epf-RedLine/
 ### `controllers/`
 Responsáveis pelas rotas e lógica de fluxo da aplicação:
 
-- **auth_controller.py** – Login e cadastro.
-- **carro_controller.py** – CRUD de carros.
-- **manutencao_controller.py** – CRUD de manutenções.
-- **user_controller.py** – Gerenciamento de usuários.
+- **auth_controller.py** — Login e cadastro de usuários.
+- **car_controller.py** — CRUD de veículos.
+- **dashboard_controller.py** — Página inicial do usuário logado.
+- **manutencao_controller.py** — CRUD de manutenções realizadas.
+- **user_controller.py** — Gerenciamento de usuários cadastrados.
+
+---
 
 ### `models/`
-Definem as entidades e estruturas de dados:
+Definem as entidades e estruturas de dados principais:
 
-- `User`: dados de usuário (login e informações pessoais)
-- `Carro`: dados de veículos
-- `Manutencao`: serviços realizados nos veículos
-- Outros modelos auxiliares
+- **user.py** — Dados do usuário (login e perfil).
+- **vehicle.py** — Dados de veículos.
+- **maintenance.py** — Registro de manutenções realizadas.
+- **manutencaoProgramada.py** — Modelo de manutenção programada.
+- **itemVidaUtil.py** — Informações sobre vida útil de itens.
+- **carro.py** — Estrutura auxiliar de veículos.
+- **manutencao.py** — Estrutura auxiliar de manutenção.
+
+---
 
 ### `services/`
-Responsáveis pela **persistência** e manipulação de dados JSON:
-- `user_service.py`: operações de usuário (`create_account`, `authenticate`, etc.)
-### `views/`
-Templates HTML (Bottle Templating Language) usados como páginas da aplicação:
+Responsáveis pela persistência e manipulação de dados JSON:
 
-- `login.tpl`, `signup.tpl`: telas de autenticação
-- `carros.tpl`: listagem de carros
-- `manutencoes.tpl`: listagem de manutenções
-- `layout.tpl`: layout base reutilizável
+- **user_service.py** — Operações com usuários (*create_account*, *authenticate*, etc.).
+- **car_service.py** — Operações com veículos.
+- **manutencao_service.py** — Operações com manutenções.
+- **vehicle_service.py** — Regras e utilidades sobre veículos.
+
+---
+
+### `views/`
+Templates HTML (Bottle Templating Language):
+
+- **login.tpl**, **signup.tpl** — Telas de autenticação.
+- **dashboard.tpl** — Página inicial.
+- **car_list.tpl**, **car_form.tpl** — Listagem e cadastro de veículos.
+- **manutencao_list.tpl**, **manutencao_form.tpl** — Listagem e cadastro de manutenções.
+- **users.tpl**, **user_form.tpl** — Gerenciamento de usuários.
+- **layout.tpl** — Layout base reutilizável.
 
 ---
 
 ### `static/`
-Arquivos estáticos como:
-- `css/style.css`: estilos básicos.
-- `js/main.js`: scripts JS opcionais.
-- `img/BottleLogo.png`: exemplo de imagem.
+Arquivos estáticos usados no front-end:
+
+- **css/** — Estilos (ex.: *style.css*, *dashboard.css*).
+- **js/** — Scripts JavaScript (*main.js*, *helper.js*).
+- **img/** — Imagens da aplicação.
+
+---
 
 ### `data/`
 Arquivos JSON que simulam o banco de dados:
 
-- `users.json`
-- `carros.json
-- `manutencoes.json`
----
+- **users.json** — Usuários cadastrados.
+- **carros.json** — Veículos registrados.
+- **manutencoes.json** — Histórico de manutenções.
+- *(A pasta `sessions/` é criada automaticamente em runtime e pode ser ignorada pelo Git.)*
 
 ---
 
@@ -119,7 +189,7 @@ pip install -r requirements.txt
 
 3. Rode a aplicação:
 ```bash
-python main.py
+python app.py
 ```
 
 4. Accese sua aplicação no navegador em: [http://localhost:8080](http://localhost:8080)
