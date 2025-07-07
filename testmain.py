@@ -1,7 +1,7 @@
 from models.carro import CarroModel
 from models.carro import Carro
-from models.manutecao import Manutencao
-from models.manutecao import ManutencaoModel
+from models.manutencao import Manutencao
+from models.manutencao import ManutencaoModel
 from models.user import UserModel
 from models.user import User
 

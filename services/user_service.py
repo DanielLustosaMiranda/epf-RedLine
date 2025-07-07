@@ -1,8 +1,9 @@
+import bottle 
 from bottle import request
 from models.user import UserModel, User
 import json
 import os
-from models.user import User
+
 
 class UserService:
     def __init__(self):
@@ -20,8 +21,10 @@ class UserService:
         name = request.forms.get('name')
         email = request.forms.get('email')
         birthdate = request.forms.get('birthdate')
+        username = request.forms.get('username')
+        password = request.forms.get('password')
 
-        user = User(id=new_id, name=name, email=email, birthdate=birthdate)
+        user = User(id=new_id, name=name, email=email, birthdate=birthdate, username=username, password=password)
         self.user_model.add_user(user)
 
 
@@ -57,7 +60,7 @@ class UserService:
         self.user_model.add_user(new_user)
         return True
     
-    def authenticate(self):
+    def authenticate(self,username,password):
         username = request.forms.get('username')
         password = request.forms.get('password')
 
@@ -66,9 +69,19 @@ class UserService:
             return user  # sucesso
         return None 
     
-    def find_user_by_username(username):
-        users = load_users()
+    def _load_users(self):
+        if not os.path.exists(self.FILE_PATH):
+            return []
+        with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return [User(**item) for item in data]
+
+    def find_user_by_username(self, username):
+        users = self.user_model.get_all()
         for user in users:
             if user.username == username:
                 return user
         return None
+    
+    def add_user(self, user):
+        self.user_model.add_user(user)

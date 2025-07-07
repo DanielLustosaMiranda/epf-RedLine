@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background-color: orange;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.manutencoes-futuras {
+    flex: 3;
+    background-color: pink;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.mf-card {
+    background-color: white;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.formulario-cadastro {
+    flex: 1;
+    background-color: #ddd;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.formulario-cadastro input,
+.formulario-cadastro select,
+.formulario-cadastro button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+footer.info-carro {
+    background-color: #bbb;
+    padding: 1rem;
+}
+
+.barra-saude {
+    background-color: #999;
+    height: 20px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.barra-preenchida {
+    background-color: green;
+    height: 100%;
+    transition: width 0.5s ease;
+}

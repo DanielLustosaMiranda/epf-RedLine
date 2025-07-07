@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
 <body>
-    <h2>Login</h2>
-    % if error:
-        <p style="color:red;">{{error}}</p>
-    % end
-    <form method="POST" action="/login">
-        <input type="text" name="user" placeholder="Usuário"><br>
-        <input type="password" name="pass" placeholder="Senha"><br>
-        <input type="submit" value="Entrar">
+    <form action="/login" method="post">
+        Username: <input name="username" type="text" />
+    </br>
+    Password: <input name="password" type="password" />
+    </br>
+    <input value="Login" type="submit" />
     </form>
 </body>
 </html>

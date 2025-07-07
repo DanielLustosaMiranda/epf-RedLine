@@ -36,18 +36,9 @@ class User:
             id=data['id'],
             name=data['name'],
             email=data['email'],
-            birthdate=data['birthdate']
-        )
-
-    @staticmethod
-    def from_dict(data):
-        return User(
-            data["id"],
-            data["name"],
-            data["email"],
-            data["birthdate"],
-            data.get("username"),
-            data.get("password")
+            birthdate=data['birthdate'],
+            username=data.get("username"),
+            password=data.get("password")
         )
 
 class UserModel:
@@ -62,7 +53,7 @@ class UserModel:
             return []
         with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            return [User(**item) for item in data]
+            return [User.from_dict(item) for item in data]
 
 
     def _save(self):
