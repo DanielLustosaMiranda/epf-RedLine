@@ -1,95 +1,46 @@
-import json
-import os
-from dataclasses import dataclass, asdict
-from typing import List
-
-DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
-
 class User:
-    def __init__(self, id, name, email, birthdate,username=None,password=None):
-        self.id = id
-        self.name = name
-        self.email = email
-        self.birthdate = birthdate
-        self.username = username
-        self.password = password
+    """Representa um usuário do sistema RedLine."""
 
-    def __repr__(self):
-        return (f"User(id={self.id}, name='{self.name}', email='{self.email}', "
-                f"birthdate='{self.birthdate}'")
+    def __init__(
+        self,
+        id,
+        name,
+        email,
+        birthdate,
+        password_hash=None,
+        username=None,
+        telefone="",
+    ):
+        self.id = int(id) if id is not None else None
+        self.name = (name or "").strip()
+        self.email = (email or "").strip().lower()
+        self.birthdate = birthdate or ""
+        self.password_hash = password_hash or ""
+        self.username = username or self.email.split("@")[0]
+        self.telefone = (telefone or "").strip()
 
-
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'birthdate': self.birthdate,
-            'username': self.username,
-            'password': self.password
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "birthdate": self.birthdate,
+            "username": self.username,
+            "telefone": self.telefone,
+            "password_hash": self.password_hash,
         }
 
-
     @classmethod
-    def from_dict(cls, data):
+    def from_dict(cls, data: dict) -> "User":
         return cls(
-            id=data['id'],
-            name=data['name'],
-            email=data['email'],
-            birthdate=data['birthdate'],
+            id=data.get("id"),
+            name=data.get("name", ""),
+            email=data.get("email", ""),
+            birthdate=data.get("birthdate", ""),
+            password_hash=data.get("password_hash") or data.get("password", ""),
             username=data.get("username"),
-            password=data.get("password")
+            telefone=data.get("telefone", ""),
         )
 
-class UserModel:
-    FILE_PATH = os.path.join(DATA_DIR, 'users.json')
-
-    def __init__(self):
-        self.users = self._load()
-
-
-    def _load(self):
-        if not os.path.exists(self.FILE_PATH):
-            return []
-        with open(self.FILE_PATH, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            return [User.from_dict(item) for item in data]
-
-
-    def _save(self):
-        with open(self.FILE_PATH, 'w', encoding='utf-8') as f:
-            json.dump([u.to_dict() for u in self.users], f, indent=4, ensure_ascii=False)
-
-
-    def get_all(self):
-        return self.users
-
-
-    def get_by_id(self, user_id: int):
-        return next((u for u in self.users if u.id == user_id), None)
-
-
-    def add_user(self, user: User):
-        self.users.append(user)
-        self._save()
-
-
-    def update_user(self, updated_user: User):
-        for i, user in enumerate(self.users):
-            if user.id == updated_user.id:
-                self.users[i] = updated_user
-                self._save()
-                break
-
-    def delete_user(self, user_id: int):
-        self.users = [u for u in self.users if u.id != user_id]
-        self._save()
-    
-    def get_by_username(self, username):
-        if not username:
-            return None
-        username = username.strip().lower()
-        for user in self.users:
-            if user.username and user.username.strip().lower() == username:
-                return user
-        return None
+    def __repr__(self) -> str:
+        return f"User(id={self.id}, name='{self.name}', email='{self.email}')"
