@@ -2,20 +2,28 @@
     {
         "id": 1,
         "user_id": 2,
-        "marca": "toyota",
-        "modelo": "mk4",
+        "marca": "Toyota",
+        "modelo": "Supra MK4",
         "ano": 2000,
-        "placa": "ABD1234",
-        "km_atual": 0
+        "placa": "ABD-1234",
+        "km_atual": 45200,
+        "combustivel": "Gasolina",
+        "cor": "Vermelho",
+        "apelido": "Lenda",
+        "observacoes": "Motor 2JZ-GTE"
     },
     {
         "id": 2,
         "user_id": 4,
-        "marca": "fiat",
-        "modelo": "palio",
+        "marca": "Fiat",
+        "modelo": "Palio Fire 1.0",
         "ano": 2006,
         "placa": "ABCD-1234",
-        "km_atual": 0
+        "km_atual": 142000,
+        "combustivel": "Flex",
+        "cor": "Prata",
+        "apelido": "Guerreiro",
+        "observacoes": ""
     },
     {
         "id": 3,
@@ -24,15 +32,62 @@
         "modelo": "Onix Plus 1.0 LT",
         "ano": 2024,
         "placa": "ADC-1540",
-        "km_atual": 6521
+        "km_atual": 16520,
+        "combustivel": "Flex",
+        "cor": "Branco",
+        "apelido": "Sedan Diário",
+        "observacoes": "Em garantia de fábrica"
     },
     {
         "id": 4,
         "user_id": 5,
-        "marca": "Hyndai",
-        "modelo": "Tucson 1.6 GLS",
+        "marca": "Hyundai",
+        "modelo": "Tucson 1.6 GLS Turbo",
         "ano": 2021,
         "placa": "OHA-3312",
-        "km_atual": 87000
+        "km_atual": 87000,
+        "combustivel": "Gasolina",
+        "cor": "Preto",
+        "apelido": "SUV Família",
+        "observacoes": "Câmbio automatizado dupla embreagem"
+    },
+    {
+        "id": 5,
+        "user_id": 6,
+        "marca": "Honda",
+        "modelo": "Civic Touring 1.5 Turbo",
+        "ano": 2021,
+        "placa": "RDL-2025",
+        "km_atual": 58400,
+        "combustivel": "Gasolina",
+        "cor": "Cinza Barium",
+        "apelido": "Daily Turbo",
+        "observacoes": "Usar sempre óleo sintético 0W20 original"
+    },
+    {
+        "id": 6,
+        "user_id": 6,
+        "marca": "Volkswagen",
+        "modelo": "Nivus Highline 200 TSI",
+        "ano": 2023,
+        "placa": "BSB-9A88",
+        "km_atual": 29300,
+        "combustivel": "Flex",
+        "cor": "Vermelho Sunset",
+        "apelido": "Nivus",
+        "observacoes": "Revisões feitas na concessionária"
+    },
+    {
+        "id": 7,
+        "user_id": 6,
+        "marca": "Fiat",
+        "modelo": "Uno  Way",
+        "ano": 2014,
+        "placa": "OHA-6442",
+        "km_atual": 30000,
+        "combustivel": "Flex",
+        "cor": "Vermelho",
+        "apelido": "Unin",
+        "observacoes": ""
     }
 ]

@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "car_id": 5,
+        "data": "2026-09-25",
+        "km": 57400,
+        "combustivel": "Gasolina Aditivada",
+        "litros": 42.5,
+        "valor_total": 254.58,
+        "preco_litro": 5.99,
+        "posto": "Posto Ipiranga Asa Sul",
+        "tanque_cheio": true
+    },
+    {
+        "id": 2,
+        "car_id": 5,
+        "data": "2026-10-10",
+        "km": 57910,
+        "combustivel": "Gasolina Aditivada",
+        "litros": 44.0,
+        "valor_total": 263.56,
+        "preco_litro": 5.99,
+        "posto": "Posto Shell Lago Sul",
+        "tanque_cheio": true
+    },
+    {
+        "id": 3,
+        "car_id": 5,
+        "data": "2026-10-24",
+        "km": 58400,
+        "combustivel": "Gasolina Podium",
+        "litros": 41.2,
+        "valor_total": 267.80,
+        "preco_litro": 6.50,
+        "posto": "Petrobras Sudoeste",
+        "tanque_cheio": true
+    },
+    {
+        "id": 4,
+        "car_id": 6,
+        "data": "2026-10-05",
+        "km": 28820,
+        "combustivel": "Gasolina Comum",
+        "litros": 40.0,
+        "valor_total": 235.60,
+        "preco_litro": 5.89,
+        "posto": "Posto Jarjour",
+        "tanque_cheio": true
+    },
+    {
+        "id": 5,
+        "car_id": 6,
+        "data": "2026-10-22",
+        "km": 29300,
+        "combustivel": "Gasolina Comum",
+        "litros": 38.4,
+        "valor_total": 226.18,
+        "preco_litro": 5.89,
+        "posto": "Posto Jarjour",
+        "tanque_cheio": true
+    }
+]

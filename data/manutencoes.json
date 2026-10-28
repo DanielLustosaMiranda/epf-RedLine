@@ -1,86 +1,110 @@
 [
     {
         "id": 1,
-        "descricao_servico": "Trocar a agua",
-        "data": "0010-10-01",
-        "custo": 0.0,
-        "tipo_manutencao": "preventiva",
-        "placa_veiculo": "UNBB1234"
-    },
-    {
-        "id": 2,
-        "descricao_servico": "Trocar a agua",
-        "data": "0010-10-01",
-        "custo": 1000.0,
-        "tipo_manutencao": "preventiva",
-        "placa_veiculo": "UNBB1234"
-    },
-    {
-        "id": 3,
-        "descricao_servico": "Trocar a agua",
-        "data": "0010-10-01",
-        "custo": 1000.0,
-        "tipo_manutencao": "preventiva",
-        "placa_veiculo": "UNBB1234"
-    },
-    {
-        "id": 4,
-        "descricao_servico": "sla",
-        "data": "0012-01-01",
-        "custo": 101.0,
-        "tipo_manutencao": "adf",
-        "placa_veiculo": "UNBB1234"
-    },
-    {
-        "id": 5,
-        "descricao_servico": "sla",
-        "data": "0012-01-01",
-        "custo": 101.0,
-        "tipo_manutencao": "adf",
-        "placa_veiculo": "UNBB1232"
-    },
-    {
-        "id": 6,
-        "descricao_servico": "Colocando turbo",
-        "data": "2005-06-06",
-        "custo": 6000.0,
-        "tipo_manutencao": "Preventiva",
-        "placa_veiculo": "supra10"
-    },
-    {
-        "id": 7,
         "car_id": 1,
-        "descricao": "troca de agua",
+        "descricao": "Troca de fluido de arrefecimento e limpeza do radiador",
         "data": "2025-07-06",
         "custo": 600.0,
         "tipo": "Preventiva",
-        "km": 640
+        "km": 44640,
+        "oficina": "RedLine Performance Garage",
+        "garantia_meses": 6,
+        "observacoes": "Aditivo sintético Motul Inugel"
+    },
+    {
+        "id": 2,
+        "car_id": 2,
+        "descricao": "Revisão completa do sistema de arrefecimento e bomba d'água",
+        "data": "2025-07-07",
+        "custo": 850.0,
+        "tipo": "Preventiva",
+        "km": 140000,
+        "oficina": "Auto Center Brasília",
+        "garantia_meses": 6,
+        "observacoes": ""
+    },
+    {
+        "id": 3,
+        "car_id": 4,
+        "descricao": "Troca de óleo do motor e filtro de óleo",
+        "data": "2024-12-02",
+        "custo": 320.0,
+        "tipo": "Preventiva",
+        "km": 78500,
+        "oficina": "Oficina Prime",
+        "garantia_meses": 6,
+        "observacoes": "Óleo 5W30 Sintético"
+    },
+    {
+        "id": 4,
+        "car_id": 4,
+        "descricao": "Retífica de cabeçote e troca de juntas",
+        "data": "2025-12-05",
+        "custo": 3200.0,
+        "tipo": "Corretiva",
+        "km": 85000,
+        "oficina": "Retífica Central",
+        "garantia_meses": 12,
+        "observacoes": "Garantia de 1 ano no serviço"
+    },
+    {
+        "id": 5,
+        "car_id": 5,
+        "descricao": "Troca de Óleo 0W20, Filtro de Óleo e Filtro de Combustível",
+        "data": "2026-04-10",
+        "custo": 460.0,
+        "tipo": "Preventiva",
+        "km": 50000,
+        "oficina": "Honda Plaza Motors",
+        "garantia_meses": 6,
+        "observacoes": "Peças genuínas Honda"
+    },
+    {
+        "id": 6,
+        "car_id": 5,
+        "descricao": "Substituição de Pastilhas de Freio Dianteiras e Fluido DOT4",
+        "data": "2026-07-15",
+        "custo": 690.0,
+        "tipo": "Preventiva",
+        "km": 54200,
+        "oficina": "Bosch Car Service",
+        "garantia_meses": 12,
+        "observacoes": "Pastilhas de cerâmica sem ruído"
+    },
+    {
+        "id": 7,
+        "car_id": 5,
+        "descricao": "Alinhamento 3D, Balanceamento e Rodízio de Pneus",
+        "data": "2026-09-20",
+        "custo": 180.0,
+        "tipo": "Preventiva",
+        "km": 57100,
+        "oficina": "PneuCenter Sul",
+        "garantia_meses": 3,
+        "observacoes": "Cambagem conferida e dentro do padrão"
     },
     {
         "id": 8,
-        "car_id": 2,
-        "descricao": "troca de agua",
-        "data": "2025-07-07",
-        "custo": 10000.0,
-        "tipo": "Preventiva",
-        "km": 0
+        "car_id": 6,
+        "descricao": "Revisão de 20.000 km na Concessionária",
+        "data": "2026-03-18",
+        "custo": 780.0,
+        "tipo": "Revisão Periódica",
+        "km": 20100,
+        "oficina": "Saga Volkswagen",
+        "garantia_meses": 12,
+        "observacoes": "Carimbo no manual de garantia"
     },
     {
         "id": 9,
-        "car_id": 4,
-        "descricao": "Troca de oleo e filtro de oleo",
-        "data": "2024-12-02",
-        "custo": 220.0,
-        "tipo": "Preventiva",
-        "km": 1500
-    },
-    {
-        "id": 10,
-        "car_id": 4,
-        "descricao": "retifica do motor",
-        "data": "2025-12-05",
-        "custo": 3200.0,
-        "tipo": "corretiva",
-        "km": 80000
+        "car_id": 6,
+        "descricao": "Troca de Bateria EFB 60Ah Start-Stop",
+        "data": "2026-08-05",
+        "custo": 890.0,
+        "tipo": "Corretiva",
+        "km": 26800,
+        "oficina": "Rei das Baterias",
+        "garantia_meses": 24,
+        "observacoes": "Bateria Moura EFB com 24 meses de garantia"
     }
 ]

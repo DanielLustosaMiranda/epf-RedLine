@@ -4,6 +4,8 @@
         "name": "bb",
         "email": "bb@example.com",
         "birthdate": "2006-02-01",
+        "username": "bb",
+        "telefone": "",
         "password_hash": "scrypt:32768:8:1$mzHwVpZsjsMmLtrq$7ec1500f220a2d061c2174a4fe734e78d574ce3ae10174166b2ec0ccf3af8de84d3879abd96ecde9def6674057037ea5dedb84441c58f7ee703a63b41d8e7d94"
     },
     {
@@ -11,6 +13,8 @@
         "name": "ab",
         "email": "a@gmail.com",
         "birthdate": "2001-01-01",
+        "username": "a",
+        "telefone": "",
         "password_hash": "scrypt:32768:8:1$BBK8rU3iAinEav3M$092b49a8dca78471abff515e45e41723c7471650d4c564682776e79e5eb1c65fd8c808c42c2bea623549f562613c0e05ce2c49ace951ff1be9e39ed98f3a3e9d"
     },
     {
@@ -18,13 +22,17 @@
         "name": "Lucas",
         "email": "lucastouram@gmail.com",
         "birthdate": "2005-08-15",
+        "username": "lucastouram",
+        "telefone": "",
         "password_hash": "scrypt:32768:8:1$sU9xyweCOhbzWWxu$4c073a6e3ef1dc5a358692ab0076f07a6382b6ffd7f0bc13c2faf91f68b750b9cf325aaa929f09a0bda928507f3bf07a470f3a6a2127492149971f3dca53f553"
     },
     {
         "id": 4,
         "name": "danielzin",
         "email": "danizlcria@gmail.com",
-        "birthdate": "1088-06-04",
+        "birthdate": "1998-06-04",
+        "username": "danizlcria",
+        "telefone": "",
         "password_hash": "scrypt:32768:8:1$DVqtvbr5lmEDtAld$7795fcb399c9e0b303e0a9615ea973d2bcb57014a4e5b2f4406bd1a139865a54d724d0a39cb3523afbbf3a7438f617241dd736c2463efa7ac0cb2f48aa5ebc6d"
     },
     {
@@ -32,6 +40,17 @@
         "name": "Joel Santana",
         "email": "joel@gmail.com",
         "birthdate": "1986-07-07",
+        "username": "joel",
+        "telefone": "(61) 99876-5432",
         "password_hash": "scrypt:32768:8:1$O3SL7DMMnS7Rbzjj$cc91932abcc85f9fd23579a7e02942d7dcd70da0704b0898e14fc2ef1a68710d204d8e142fab3bf6c5610bc99f09259e92ec6decbfba567d1657213aa01c00cd"
+    },
+    {
+        "id": 6,
+        "name": "Motorista Demo RedLine",
+        "email": "demo@redline.com",
+        "birthdate": "1995-04-20",
+        "username": "demo",
+        "telefone": "(61) 99123-4567",
+        "password_hash": "scrypt:32768:8:1$zNTKAhamUL7PQ4PB$a57ce18a2fa606a89f5ee59c3119f3da975ba49af26cd39a865cac8797f64638fe97779cc339f4203c28f73da44acc95cec394f88ba046c6307e66c5dab93e40"
     }
 ]

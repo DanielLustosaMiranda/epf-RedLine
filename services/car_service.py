@@ -1,65 +1,143 @@
-import data_manager
+from models.carro import Carro
+from services import data_manager
 
 CARS_FILE = 'carros.json'
 
-def get_cars_by_user_id(user_id):
-    all_cars = data_manager.read_data(CARS_FILE)
-    user_cars = [car for car in all_cars if car.get('user_id') == user_id]
-    return user_cars
 
-def get_car_by_id(car_id):
-    all_cars = data_manager.read_data(CARS_FILE)
-    for car in all_cars:
-        if car.get('id') == car_id:
-            return car
+def get_cars_by_user_id(user_id) -> list[dict]:
+    if user_id is None:
+        return []
+    target_user_id = int(user_id)
+    raw = data_manager.read_data(CARS_FILE)
+    cars = [Carro.from_dict(c).to_dict() for c in raw if int(c.get('user_id', 0)) == target_user_id]
+    return cars
+
+
+def get_car_by_id(car_id, user_id=None) -> dict | None:
+    if car_id is None:
+        return None
+    target_id = int(car_id)
+    raw = data_manager.read_data(CARS_FILE)
+    for c in raw:
+        if int(c.get('id', 0)) == target_id:
+            if user_id is not None and int(c.get('user_id', 0)) != int(user_id):
+                return None
+            return Carro.from_dict(c).to_dict()
     return None
 
-def create_car(marca, modelo, ano, placa, km_atual, user_id):
+
+def create_car(
+    marca: str,
+    modelo: str,
+    ano: int,
+    placa: str,
+    km_atual: int,
+    user_id: int,
+    combustivel: str = "Flex",
+    cor: str = "",
+    apelido: str = "",
+    observacoes: str = "",
+) -> dict:
     all_cars = data_manager.read_data(CARS_FILE)
+    new_id = data_manager.next_id(all_cars)
 
-    last_id = all_cars[-1]['id'] if all_cars else 0
-    new_id = last_id + 1
-
-    new_car = {
-        'id': new_id,
-        'user_id': user_id,
-        'marca': marca,
-        'modelo': modelo,
-        'ano': int(ano),
-        'placa': placa.upper(),
-        'km_atual': int(km_atual)
-    }
-
-    all_cars.append(new_car)
+    car_obj = Carro(
+        id=new_id,
+        user_id=user_id,
+        marca=marca,
+        modelo=modelo,
+        ano=ano,
+        placa=placa,
+        km_atual=km_atual,
+        combustivel=combustivel,
+        cor=cor,
+        apelido=apelido,
+        observacoes=observacoes,
+    )
+    car_dict = car_obj.to_dict()
+    all_cars.append(car_dict)
     data_manager.write_data(CARS_FILE, all_cars)
-    return new_car
+    return car_dict
 
-def update_car(car_id, marca, modelo, ano, placa, km_atual):
+
+def update_car(
+    car_id: int,
+    marca: str,
+    modelo: str,
+    ano: int,
+    placa: str,
+    km_atual: int,
+    combustivel: str = "Flex",
+    cor: str = "",
+    apelido: str = "",
+    observacoes: str = "",
+    user_id: int = None,
+) -> dict | None:
     all_cars = data_manager.read_data(CARS_FILE)
-    car_to_update = None
-    
-    for car in all_cars:
-        if car.get('id') == car_id:
-            car['marca'] = marca
-            car['modelo'] = modelo
-            car['ano'] = int(ano)
-            car['placa'] = placa.upper()
-            car['km_atual'] = int(km_atual)
-            car_to_update = car
-            break
+    target_id = int(car_id)
 
-    if car_to_update:
-        data_manager.write_data(CARS_FILE, all_cars)
+    for i, c in enumerate(all_cars):
+        if int(c.get('id', 0)) == target_id:
+            if user_id is not None and int(c.get('user_id', 0)) != int(user_id):
+                return None
+            updated = Carro(
+                id=target_id,
+                user_id=c.get('user_id'),
+                marca=marca,
+                modelo=modelo,
+                ano=ano,
+                placa=placa,
+                km_atual=km_atual,
+                combustivel=combustivel,
+                cor=cor,
+                apelido=apelido,
+                observacoes=observacoes,
+            ).to_dict()
+            all_cars[i] = updated
+            data_manager.write_data(CARS_FILE, all_cars)
+            return updated
+    return None
 
-    return car_to_update
 
-def delete_car(car_id):
+def update_car_km(car_id: int, novo_km: int, user_id: int = None, force: bool = True) -> dict | None:
+    """Atualiza a quilometragem atual do carro. Se force=False, só atualiza se novo_km > km_atual."""
     all_cars = data_manager.read_data(CARS_FILE)
-    original_count = len(all_cars)
-    cars_to_keep = [car for car in all_cars if car.get('id') != car_id]
+    target_id = int(car_id)
+    novo_km_val = max(0, int(float(novo_km or 0)))
 
-    if len(cars_to_keep) < original_count:
-        data_manager.write_data(CARS_FILE, cars_to_keep)
-        return True
-        
-    return False
+    for i, c in enumerate(all_cars):
+        if int(c.get('id', 0)) == target_id:
+            if user_id is not None and int(c.get('user_id', 0)) != int(user_id):
+                return None
+            km_atual = int(c.get('km_atual', 0))
+            if force or novo_km_val > km_atual:
+                c['km_atual'] = novo_km_val
+                all_cars[i] = Carro.from_dict(c).to_dict()
+                data_manager.write_data(CARS_FILE, all_cars)
+            return all_cars[i]
+    return None
+
+
+def delete_car(car_id: int, user_id: int = None) -> bool:
+    all_cars = data_manager.read_data(CARS_FILE)
+    target_id = int(car_id)
+    car = get_car_by_id(target_id, user_id=user_id)
+    if not car:
+        return False
+
+    cars_to_keep = [c for c in all_cars if int(c.get('id', 0)) != target_id]
+    data_manager.write_data(CARS_FILE, cars_to_keep)
+
+    # Limpa registros dependentes (manutenções, agendamentos, itens de vida útil e abastecimentos)
+    for filename, key in [
+        ('manutencoes.json', 'car_id'),
+        ('manutencoes_programadas.json', 'id_veiculo'),
+        ('itens_vida_util.json', 'id_veiculo'),
+        ('abastecimentos.json', 'car_id'),
+    ]:
+        items = data_manager.read_data(filename)
+        filtered = [item for item in items if int(item.get(key, 0) or 0) != target_id]
+        if len(filtered) != len(items):
+            data_manager.write_data(filename, filtered)
+
+    return True

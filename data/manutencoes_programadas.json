@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "id_veiculo": 5,
+        "descricao": "Troca de Óleo 0W20 e Filtro de Óleo",
+        "frequencia_dias": 180,
+        "ultima_data": "2026-04-10",
+        "frequencia_km": 10000,
+        "ultimo_km": 50000,
+        "custo_estimado": 460.0,
+        "observacoes": "Óleo sintético 0W20"
+    },
+    {
+        "id": 2,
+        "id_veiculo": 5,
+        "descricao": "Troca de Fluido do Câmbio CVT",
+        "frequencia_dias": 730,
+        "ultima_data": "2025-05-10",
+        "frequencia_km": 40000,
+        "ultimo_km": 20000,
+        "custo_estimado": 980.0,
+        "observacoes": "Fluido HCF-2 original"
+    },
+    {
+        "id": 3,
+        "id_veiculo": 5,
+        "descricao": "Higienização do Ar-Condicionado e Filtro de Cabine",
+        "frequencia_dias": 180,
+        "ultima_data": "2026-08-15",
+        "frequencia_km": 15000,
+        "ultimo_km": 55000,
+        "custo_estimado": 140.0,
+        "observacoes": ""
+    },
+    {
+        "id": 4,
+        "id_veiculo": 6,
+        "descricao": "Revisão de 30.000 km (Óleo + Filtros + Velas)",
+        "frequencia_dias": 365,
+        "ultima_data": "2026-03-18",
+        "frequencia_km": 10000,
+        "ultimo_km": 20100,
+        "custo_estimado": 920.0,
+        "observacoes": "Agendar na concessionária antes de 30.000 km"
+    },
+    {
+        "id": 5,
+        "id_veiculo": 4,
+        "descricao": "Troca de Óleo do Motor e Filtro",
+        "frequencia_dias": 180,
+        "ultima_data": "2024-12-02",
+        "frequencia_km": 10000,
+        "ultimo_km": 78500,
+        "custo_estimado": 350.0,
+        "observacoes": ""
+    }
+]

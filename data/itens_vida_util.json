@@ -1,0 +1,156 @@
+[
+    {
+        "id": 1,
+        "id_veiculo": 5,
+        "nome_item": "Óleo do Motor 0W20 e Filtro",
+        "data_instalacao": "2026-04-10",
+        "validade_anos": 0.5,
+        "km_instalacao": 50000,
+        "validade_km": 10000,
+        "marca_peca": "Honda Genuine",
+        "observacoes": ""
+    },
+    {
+        "id": 2,
+        "id_veiculo": 5,
+        "nome_item": "Pastilhas de Freio Dianteiras",
+        "data_instalacao": "2026-07-15",
+        "validade_anos": 2.0,
+        "km_instalacao": 54200,
+        "validade_km": 30000,
+        "marca_peca": "Bosch Cerâmica",
+        "observacoes": ""
+    },
+    {
+        "id": 3,
+        "id_veiculo": 5,
+        "nome_item": "Jogo de Pneus 215/50 R17",
+        "data_instalacao": "2024-06-10",
+        "validade_anos": 4.0,
+        "km_instalacao": 22000,
+        "validade_km": 45000,
+        "marca_peca": "Michelin Primacy 4",
+        "observacoes": "Calibrar com 32 PSI"
+    },
+    {
+        "id": 4,
+        "id_veiculo": 5,
+        "nome_item": "Bateria 12V 60Ah",
+        "data_instalacao": "2024-01-15",
+        "validade_anos": 3.0,
+        "km_instalacao": 18000,
+        "validade_km": 60000,
+        "marca_peca": "Heliar",
+        "observacoes": ""
+    },
+    {
+        "id": 5,
+        "id_veiculo": 6,
+        "nome_item": "Bateria EFB 60Ah Start-Stop",
+        "data_instalacao": "2026-08-05",
+        "validade_anos": 3.0,
+        "km_instalacao": 26800,
+        "validade_km": 60000,
+        "marca_peca": "Moura EFB",
+        "observacoes": "Na garantia até 08/2028"
+    },
+    {
+        "id": 6,
+        "id_veiculo": 6,
+        "nome_item": "Óleo Sintético 5W40 VW 508.88",
+        "data_instalacao": "2026-03-18",
+        "validade_anos": 1.0,
+        "km_instalacao": 20100,
+        "validade_km": 10000,
+        "marca_peca": "Shell Helix HX8",
+        "observacoes": "Faltam 800 km para o limite de troca"
+    },
+    {
+        "id": 7,
+        "id_veiculo": 7,
+        "nome_item": "Óleo do Motor e Filtro",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 0.5,
+        "km_instalacao": 30000,
+        "validade_km": 10000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 8,
+        "id_veiculo": 7,
+        "nome_item": "Pastilhas de Freio Dianteiras",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 2.0,
+        "km_instalacao": 30000,
+        "validade_km": 30000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 9,
+        "id_veiculo": 7,
+        "nome_item": "Bateria 12V",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 3.0,
+        "km_instalacao": 30000,
+        "validade_km": 60000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 10,
+        "id_veiculo": 7,
+        "nome_item": "Jogo de Pneus",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 5.0,
+        "km_instalacao": 30000,
+        "validade_km": 50000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 11,
+        "id_veiculo": 7,
+        "nome_item": "Correia Dentada / Acessórios",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 4.0,
+        "km_instalacao": 30000,
+        "validade_km": 60000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 12,
+        "id_veiculo": 7,
+        "nome_item": "Filtro de Ar e Filtro de Cabine",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 1.0,
+        "km_instalacao": 30000,
+        "validade_km": 15000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 13,
+        "id_veiculo": 7,
+        "nome_item": "Velas de Ignição",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 3.0,
+        "km_instalacao": 30000,
+        "validade_km": 40000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    },
+    {
+        "id": 14,
+        "id_veiculo": 7,
+        "nome_item": "Palhetas do Limpador de Para-brisa",
+        "data_instalacao": "2026-10-28",
+        "validade_anos": 1.0,
+        "km_instalacao": 30000,
+        "validade_km": 20000,
+        "marca_peca": "",
+        "observacoes": "Adicionado pelo Kit Essencial RedLine"
+    }
+]
