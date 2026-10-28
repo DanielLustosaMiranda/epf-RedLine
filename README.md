@@ -1,215 +1,142 @@
-# Projeto Template: POO com Python + Bottle + JSON
+# RedLine — Sistema de Gestão e Manutenção Automotiva
 
-Este é um projeto de template educacional voltado para o ensino de **Programação Orientada a Objetos (POO)** do Prof. Lucas Boaventura, Universidade de Brasília (UnB).
+O **RedLine** é uma aplicação web completa para gerenciamento de veículos, histórico de manutenções, agendamento de revisões preventivas, monitoramento de vida útil de peças/componentes e controle de abastecimentos e custos operacionais.
 
-Utiliza o microframework **Bottle**. Ideal para uso em disciplinas introdutórias de Engenharia de Software ou Ciência da Computação.
+Desenvolvido em **Python** com arquitetura **MVC + Services** orientada a objetos, utilizando o microframework **Bottle** e persistência estruturada em **JSON**.
 
-## 💡 Objetivo
+---
 
-Fornecer uma base simples, extensível e didática para construção de aplicações web orientadas a objetos com aplicações WEB em Python, ideal para trabalhos finais ou exercícios práticos.
+## 🚀 Principais Funcionalidades e Facilidades
+
+- **Painel de Controle Inteligente (`/dashboard`)**:
+  - Indicadores gerais da frota (total de veículos, saúde média, gastos em manutenções, gastos com combustível e custo operacional total).
+  - **Central de Alertas Automáticos**: identifica revisões programadas atrasadas ou próximas do vencimento (por data ou quilometragem) e peças com vida útil crítica.
+  - Resolução de alertas com **1 clique** (concluir revisão ou substituir peça diretamente pelo painel).
+- **Minha Garagem & Painel 360º do Veículo (`/carros` e `/carros/<id>`)**:
+  - Cálculo dinâmico do **Índice de Saúde do Veículo (0% a 100%)**.
+  - **Atualização rápida de hodômetro (KM)** com 1 clique diretamente nos cards da garagem ou no painel do veículo.
+  - Sincronização inteligente de KM: ao registrar uma manutenção ou abastecimento com KM superior ao atual, o hodômetro do carro é atualizado automaticamente.
+- **Manutenções Programadas (`ManutencaoProgramada`)**:
+  - Agendamento por **intervalo de dias** e/ou **intervalo de quilometragem**.
+  - **Presets rápidos** de revisões comuns (Óleo e Filtro, Freios, Alinhamento, Arrefecimento, Correia Dentada, etc.).
+  - Botão **Concluir**: registra automaticamente o serviço no histórico de manutenções realizadas e reinicia a contagem para o próximo ciclo.
+- **Monitoramento de Vida Útil de Peças (`ItemVidaUtil`)**:
+  - Acompanhamento de desgaste de peças por tempo de instalação e por quilometragem rodada.
+  - **Gerador de Kit Essencial (1 Clique)**: adiciona automaticamente os 8 itens vitais de monitoramento para qualquer veículo.
+  - Botão **Substituir Peça (100%)**: renova a peça para 100% de saúde e registra a troca no histórico do carro.
+- **Controle de Abastecimentos e Consumo (`Abastecimento`)**:
+  - Registro de abastecimentos com cálculo automático de preço por litro e **consumo médio em km/L**.
+- **Relatórios Financeiros e Dossiê Técnico (`/relatorios`)**:
+  - Comparativo de custos por veículo e por categoria de manutenção.
+  - Emissão de **Dossiê Técnico do Veículo** formatado para impressão ou exportação em PDF (`window.print()`), ideal para comprovar revisões na revenda.
+- **Acesso Rápido de Demonstração**:
+  - Botão de **Login Demo com 1 Clique** na tela inicial (`demo@redline.com` / senha `123456`).
 
 ---
 
 ## 🗂 Estrutura de Pastas
 
-```bash 
+```text
 epf-RedLine/
-├── app.py
-├── auth_decorator.py
-├── config.py
-├── controllers
-│   ├── auth_controller.py
-│   ├── car_controller.py
-│   ├── dashboard_controller.py
-│   ├── manutencao_controller.py
-│   ├── __pycache__
-│   │   ├── auth_controller.cpython-311.pyc
-│   │   ├── auth_controller.cpython-313.pyc
-│   │   ├── base_controller.cpython-313.pyc
-│   │   ├── car_controller.cpython-311.pyc
-│   │   ├── car_controller.cpython-313.pyc
-│   │   ├── dashboard_controller.cpython-313.pyc
-│   │   ├── __init__.cpython-313.pyc
-│   │   ├── manutencao_controller.cpython-311.pyc
-│   │   ├── manutencao_controller.cpython-313.pyc
-│   │   ├── user_controller.cpython-311.pyc
-│   │   └── user_controller.cpython-313.pyc
-│   └── user_controller.py
-├── data
-│   ├── carros.json
-│   ├── manutencoes.json
-│   └── users.json
-├── data_manager.py
-├── Makefile
-├── models
-│   ├── carro.py
-│   ├── itemVidaUtil.py
-│   ├── maintenance.py
-│   ├── manutencaoProgramada.py
-│   ├── manutencao.py
-│   ├── __pycache__
-│   │   ├── maintenance.cpython-313.pyc
-│   │   ├── manutencao.cpython-313.pyc
-│   │   ├── user.cpython-313.pyc
-│   │   └── vehicle.cpython-313.pyc
-│   ├── user.py
-│   └── vehicle.py
-├── __pycache__
-│   ├── app.cpython-313.pyc
-│   ├── auth_decorator.cpython-311.pyc
-│   ├── auth_decorator.cpython-313.pyc
-│   ├── config.cpython-313.pyc
-│   ├── data_manager.cpython-311.pyc
-│   └── data_manager.cpython-313.pyc
-├── README.md
-├── requirements.txt
-├── services
-│   ├── car_service.py
-│   ├── manutencao_service.py
-│   ├── __pycache__
-│   │   ├── car_service.cpython-311.pyc
-│   │   ├── car_service.cpython-313.pyc
-│   │   ├── maintenance_service.cpython-313.pyc
-│   │   ├── manutencao_service.cpython-311.pyc
-│   │   ├── manutencao_service.cpython-313.pyc
-│   │   ├── user_service.cpython-311.pyc
-│   │   ├── user_service.cpython-313.pyc
-│   │   └── vehicle_service.cpython-313.pyc
-│   ├── user_service.py
-│   └── vehicle_service.py
-├── static
-│   ├── css
-│   │   ├── dashboard.css
-│   │   ├── helper.css
-│   │   └── style.css
-│   ├── img
-│   │   └── BottleLogo.png
-│   └── js
-│       ├── helper.js
-│       └── main.js
-├── test.py
-├── view_helper.py
-└── views
-    ├── car_form.tpl
-    ├── car_list.tpl
-    ├── dashboard.tpl
-    ├── helper-final.tpl
-    ├── home_logged.tpl
-    ├── home.tpl
-    ├── layout.tpl
-    ├── login.tpl
-    ├── manutencao_form.tpl
-    ├── manutencao_list.tpl
-    ├── signup.tpl
-    ├── user_form.tpl
-    └── users.tpl
+├── app.py                          # Ponto de entrada da aplicação e configuração WSGI
+├── config.py                       # Configurações globais, constantes e presets
+├── Makefile                        # Atalhos para execução, limpeza e testes
+├── requirements.txt                # Dependências do projeto
+├── README.md                       # Documentação do projeto
+├── controllers/                    # Controladores (Rotas HTTP)
+│   ├── __init__.py
+│   ├── auth_controller.py          # Login, login demo, cadastro e logout
+│   ├── car_controller.py           # Garagem, painel 360º do veículo e hodômetro
+│   ├── dashboard_controller.py     # Dashboard principal e página de relatórios
+│   ├── manutencao_controller.py    # Manutenções, agendamentos, vida útil e abastecimentos
+│   └── user_controller.py          # Gestão de perfil e senha do usuário
+├── models/                         # Modelos de Domínio (POO)
+│   ├── __init__.py
+│   ├── user.py                     # Entidade User
+│   ├── carro.py                    # Entidade Carro
+│   ├── manutencao.py               # Entidade Manutencao
+│   ├── manutencaoProgramada.py     # Entidade ManutencaoProgramada
+│   ├── itemVidaUtil.py             # Entidade ItemVidaUtil
+│   └── abastecimento.py            # Entidade Abastecimento
+├── services/                       # Camada de Negócio e Persistência
+│   ├── __init__.py
+│   ├── data_manager.py             # Leitura e escrita segura dos arquivos JSON
+│   ├── user_service.py             # Regras de negócio de usuários e autenticação
+│   ├── car_service.py              # Regras de negócio de veículos e exclusão em cascata
+│   ├── manutencao_service.py       # Histórico de manutenções e filtros
+│   ├── programada_service.py       # Cálculos de vencimento e conclusão de agendamentos
+│   ├── vida_util_service.py        # Cálculo de desgaste de peças e geração de kit padrão
+│   ├── abastecimento_service.py    # Controle de combustível e média km/L
+│   └── dashboard_service.py        # Agregação de indicadores, alertas e saúde da frota
+├── utils/                          # Utilitários e Middlewares
+│   ├── __init__.py
+│   ├── auth_decorator.py           # Decorator @login_required e mensagens flash
+│   ├── security.py                 # Hash e verificação de senhas (scrypt)
+│   ├── session_middleware.py       # Gerenciamento de sessão (Beaker / Fallback nativo)
+│   └── view_helper.py              # Renderização de views e formatadores (R$, KM, Datas)
+├── views/                          # Templates HTML (Bottle SimpleTemplate)
+│   ├── layout.tpl
+│   ├── login.tpl
+│   ├── signup.tpl
+│   ├── dashboard.tpl
+│   ├── car_list.tpl
+│   ├── car_detail.tpl
+│   ├── car_form.tpl
+│   ├── manutencao_list.tpl
+│   ├── manutencao_form.tpl
+│   ├── programada_form.tpl
+│   ├── vida_util_form.tpl
+│   ├── abastecimento_form.tpl
+│   ├── relatorios.tpl
+│   └── profile.tpl
+├── static/                         # Arquivos Estáticos (Front-end)
+│   ├── css/
+│   │   └── style.css
+│   ├── img/
+│   │   └── BottleLogo.png
+│   └── js/
+│       └── main.js
+├── data/                           # Banco de Dados em JSON
+│   ├── users.json
+│   ├── carros.json
+│   ├── manutencoes.json
+│   ├── manutencoes_programadas.json
+│   ├── itens_vida_util.json
+│   └── abastecimentos.json
+└── diagrama/
+    └── Diagrama.png                # Diagrama UML de classes do projeto
 ```
----
-
-## 📁 Descrição das Pastas
-
-### `controllers/`
-Responsáveis pelas rotas e lógica de fluxo da aplicação:
-
-- **auth_controller.py** — Login e cadastro de usuários.
-- **car_controller.py** — CRUD de veículos.
-- **dashboard_controller.py** — Página inicial do usuário logado.
-- **manutencao_controller.py** — CRUD de manutenções realizadas.
-- **user_controller.py** — Gerenciamento de usuários cadastrados.
 
 ---
 
-### `models/`
-Definem as entidades e estruturas de dados principais:
+## 📊 Diagrama UML de Classes
 
-- **user.py** — Dados do usuário (login e perfil).
-- **vehicle.py** — Dados de veículos.
-- **maintenance.py** — Registro de manutenções realizadas.
-- **manutencaoProgramada.py** — Modelo de manutenção programada.
-- **itemVidaUtil.py** — Informações sobre vida útil de itens.
-- **carro.py** — Estrutura auxiliar de veículos.
-- **manutencao.py** — Estrutura auxiliar de manutenção.
-
----
-
-### `services/`
-Responsáveis pela persistência e manipulação de dados JSON:
-
-- **user_service.py** — Operações com usuários (*create_account*, *authenticate*, etc.).
-- **car_service.py** — Operações com veículos.
-- **manutencao_service.py** — Operações com manutenções.
-- **vehicle_service.py** — Regras e utilidades sobre veículos.
-
----
-
-### `views/`
-Templates HTML (Bottle Templating Language):
-
-- **login.tpl**, **signup.tpl** — Telas de autenticação.
-- **dashboard.tpl** — Página inicial.
-- **car_list.tpl**, **car_form.tpl** — Listagem e cadastro de veículos.
-- **manutencao_list.tpl**, **manutencao_form.tpl** — Listagem e cadastro de manutenções.
-- **users.tpl**, **user_form.tpl** — Gerenciamento de usuários.
-- **layout.tpl** — Layout base reutilizável.
-
----
-
-### `static/`
-Arquivos estáticos usados no front-end:
-
-- **css/** — Estilos (ex.: *style.css*, *dashboard.css*).
-- **js/** — Scripts JavaScript (*main.js*, *helper.js*).
-- **img/** — Imagens da aplicação.
-
----
-
-### `data/`
-Arquivos JSON que simulam o banco de dados:
-
-- **users.json** — Usuários cadastrados.
-- **carros.json** — Veículos registrados.
-- **manutencoes.json** — Histórico de manutenções.
-- *(A pasta `sessions/` é criada automaticamente em runtime e pode ser ignorada pelo Git.)*
-
----
 ![Diagrama UML do Projeto](diagrama/Diagrama.png)
+
+---
+
 ## ▶️ Como Executar
 
-1. Crie o ambiente virtual na pasta fora do seu projeto:
+1. **(Opcional) Crie e ative um ambiente virtual**:
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\\Scripts\\activate     # Windows
+python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
 ```
 
-2. Entre dentro do seu projeto criado a partir do template e instale as dependências:
+2. **Instale as dependências**:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Rode a aplicação:
+3. **Inicie o servidor**:
 ```bash
-python app.py
+python3 -B app.py
+# ou utilizando o Makefile:
+make run
 ```
 
-4. Accese sua aplicação no navegador em: [http://localhost:8080](http://localhost:8080)
-
----
-
-## ✍️ Personalização
-Para adicionar novos modelos (ex: Atividades):
-
-1. Crie a classe no diretório **models/**.
-
-2. Crie o service correspondente para manipulação do JSON.
-
-3. Crie o controller com as rotas.
-
-4. Crie as views .tpl associadas.
-
----
-
-## 🧠 Autor e Licença
-Projeto desenvolvido como template didático para disciplinas de Programação Orientada a Objetos, baseado no [BMVC](https://github.com/hgmachine/bmvc_start_from_this).
-Você pode reutilizar, modificar e compartilhar livremente.
-# epf-RedLine
+4. **Acesse no navegador**:
+   - URL: [http://localhost:8080](http://localhost:8080)
+   - **Conta de Demonstração**:
+     - **E-mail**: `demo@redline.com`
+     - **Senha**: `123456` *(ou clique no botão "Entrar com Conta Demonstração" na tela de login)*
