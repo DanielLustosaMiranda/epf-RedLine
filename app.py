@@ -1,36 +1,36 @@
-from bottle import run, route, view, static_file, TEMPLATE_PATH, default_app, request, template, redirect
-from beaker.middleware import SessionMiddleware
-from services import user_service
-from controllers import car_controller
-import controllers.manutencao_controller 
+import sys
+sys.dont_write_bytecode = True
 
-TEMPLATE_PATH.insert(0, './views/')
+from bottle import run, route, static_file, TEMPLATE_PATH, default_app, redirect
+from config import VIEWS_DIR, STATIC_DIR, SESSION_OPTS, HOST, PORT, DEBUG
+from utils.auth_decorator import get_session
+from utils.session_middleware import create_session_middleware
 
-session_opts = {
-    'session.type': 'file',
-    'session.cookie_expires': 3600, # 1 hora
-    'session.data_dir': './data/sessions',
-    'session.auto': True
-}
+if VIEWS_DIR not in TEMPLATE_PATH:
+    TEMPLATE_PATH.insert(0, VIEWS_DIR)
 
-import controllers.user_controller
+# Importa todos os controladores para registrar as rotas
 import controllers.auth_controller
+import controllers.dashboard_controller
+import controllers.car_controller
+import controllers.manutencao_controller
+import controllers.user_controller
+
 
 @route('/static/<filepath:path>')
 def server_static(filepath):
-    return static_file(filepath, root='./static')
+    return static_file(filepath, root=STATIC_DIR)
+
 
 @route('/')
 def index():
-    session = request.environ.get('beaker.session')
-    
-    if session.get('user_id'):
-        redirect('/carros')
-    else:
-        redirect('/login')
-# Pega a aplicação padrão do Bottle e a "envelopa" com o middleware de sessão
-app_with_sessions = SessionMiddleware(default_app(), session_opts)
+    session = get_session()
+    if session and session.get('user_id'):
+        return redirect('/dashboard')
+    return redirect('/login')
 
+
+app_with_sessions = create_session_middleware(default_app(), SESSION_OPTS)
 
 if __name__ == '__main__':
-    run(app=app_with_sessions, host='0.0.0.0', port=8080, reloader=True, debug=True)
+    run(app=app_with_sessions, host=HOST, port=PORT, reloader=DEBUG, debug=DEBUG)
